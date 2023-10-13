@@ -1,10 +1,24 @@
 # add stages here 
 stages:
-  stage_name:
+  get_data:
     cmd: python src/stage_01_get_data.py --config=configs/config.yaml
     deps:
-    - src/stage_01_get_data.py
-    - src/utils/common.py
-    - configs/config.yaml  # By adding this config file in dependecies, DVC can track changes
+      - src/stage_01_get_data.py
+      - src/utils/common.py
+      - configs/config.yaml  # By adding this config file in dependecies, DVC can track changes
     outs:
-    - data/data.xml
+      - data/data.xml
+  prepare_data:
+    cmd: python src/stage_02_prepare_data.py --config=configs/config.yaml --params=params.yaml
+    deps:
+      - src/stage_02_prepare_data.py
+      - src/utils/common.py
+      - src/utils/data_mgmt.py
+      - configs/config.yaml  
+      - data/data.xml
+    params:
+      - prepare.seed
+      - prepare.split # By using params.yaml file, it gets the prameters
+    outs:
+      - artifacts/prepared/train.tsv
+      - artifacts/prepared/test.tsv
