@@ -3,4 +3,7 @@
 prepare: 
   split: 0.3
   seed: 2023
-  
+
+featurize:
+  max_features: 300
+  ngrams: 2 
