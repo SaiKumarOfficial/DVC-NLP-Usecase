@@ -25,16 +25,16 @@ stages:
     deps:
     - path: configs/config.yaml
       hash: md5
-      md5: 081d7d3aa3a862d07975f1d93889ecb8
-      size: 451
+      md5: 8b115d51c85c60190e8bf75b8ee704bc
+      size: 546
     - path: src/stage_01_get_data.py
       hash: md5
       md5: 4b03247e6c9f9f1644607b0bd9315dfa
       size: 1647
     - path: src/utils/common.py
       hash: md5
-      md5: e69fea64086ec5886d2527f88cfb6516
-      size: 675
+      md5: 68ff59a3b0f7a34504deec1f5ad7bdca
+      size: 1004
     outs:
     - path: data/data.xml
       hash: md5
@@ -45,8 +45,8 @@ stages:
     deps:
     - path: configs/config.yaml
       hash: md5
-      md5: 081d7d3aa3a862d07975f1d93889ecb8
-      size: 451
+      md5: 8b115d51c85c60190e8bf75b8ee704bc
+      size: 546
     - path: data/data.xml
       hash: md5
       md5: a304afb96060aad90176268345e10355
@@ -57,8 +57,8 @@ stages:
       size: 2146
     - path: src/utils/common.py
       hash: md5
-      md5: e69fea64086ec5886d2527f88cfb6516
-      size: 675
+      md5: 68ff59a3b0f7a34504deec1f5ad7bdca
+      size: 1004
     - path: src/utils/data_mgmt.py
       hash: md5
       md5: 79cb5bf8734200a1f6305300aba58785
@@ -76,3 +76,43 @@ stages:
       hash: md5
       md5: 47ccd8571631f7443ce3e1a83c51f265
       size: 16633862
+  featurize:
+    cmd: python src/stage_03_featurization.py --config=configs/config.yaml --params=params.yaml
+    deps:
+    - path: artifacts/prepared/test.tsv
+      hash: md5
+      md5: 6b8974e10caf74dc271e8d52768a53bf
+      size: 7252457
+    - path: artifacts/prepared/train.tsv
+      hash: md5
+      md5: 47ccd8571631f7443ce3e1a83c51f265
+      size: 16633862
+    - path: configs/config.yaml
+      hash: md5
+      md5: 8b115d51c85c60190e8bf75b8ee704bc
+      size: 546
+    - path: src/stage_03_featurization.py
+      hash: md5
+      md5: c522595bd6e890d24bce22478ebdaa1d
+      size: 3026
+    - path: src/utils/common.py
+      hash: md5
+      md5: 68ff59a3b0f7a34504deec1f5ad7bdca
+      size: 1004
+    - path: src/utils/featurize.py
+      hash: md5
+      md5: 8c3a7e412c77306b811f1b73f1124408
+      size: 565
+    params:
+      params.yaml:
+        featurize.max_features: 300
+        featurize.ngrams: 2
+    outs:
+    - path: artifacts/features/test.pkl
+      hash: md5
+      md5: d58c6923c4e18624e6d8aa04441999bb
+      size: 2005996
+    - path: artifacts/features/train.pkl
+      hash: md5
+      md5: c22102d7ecb28242783db9dddb0f7398
+      size: 4648876

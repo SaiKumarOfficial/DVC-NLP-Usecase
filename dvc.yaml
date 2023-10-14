@@ -22,3 +22,18 @@ stages:
     outs:
       - artifacts/prepared/train.tsv
       - artifacts/prepared/test.tsv
+  featurize:
+    cmd: python src/stage_03_featurization.py --config=configs/config.yaml --params=params.yaml
+    deps:
+      - src/stage_03_featurization.py
+      - src/utils/common.py
+      - src/utils/featurize.py
+      - configs/config.yaml  
+      - artifacts/prepared/train.tsv
+      - artifacts/prepared/test.tsv
+    params:
+      - featurize.max_features
+      - featurize.ngrams
+    outs:
+      - artifacts/features/train.pkl
+      - artifacts/features/test.pkl
