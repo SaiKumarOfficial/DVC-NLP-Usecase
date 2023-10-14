@@ -25,8 +25,8 @@ stages:
     deps:
     - path: configs/config.yaml
       hash: md5
-      md5: e158b2159a11e3583afe2a0f416eec3b
-      size: 597
+      md5: a41bc9f460cb7cce30feb7133d026b5f
+      size: 674
     - path: src/stage_01_get_data.py
       hash: md5
       md5: 4b03247e6c9f9f1644607b0bd9315dfa
@@ -45,8 +45,8 @@ stages:
     deps:
     - path: configs/config.yaml
       hash: md5
-      md5: e158b2159a11e3583afe2a0f416eec3b
-      size: 597
+      md5: a41bc9f460cb7cce30feb7133d026b5f
+      size: 674
     - path: data/data.xml
       hash: md5
       md5: a304afb96060aad90176268345e10355
@@ -89,8 +89,8 @@ stages:
       size: 16633862
     - path: configs/config.yaml
       hash: md5
-      md5: e158b2159a11e3583afe2a0f416eec3b
-      size: 597
+      md5: a41bc9f460cb7cce30feb7133d026b5f
+      size: 674
     - path: src/stage_03_featurization.py
       hash: md5
       md5: c522595bd6e890d24bce22478ebdaa1d
@@ -125,8 +125,8 @@ stages:
       size: 4648876
     - path: configs/config.yaml
       hash: md5
-      md5: e158b2159a11e3583afe2a0f416eec3b
-      size: 597
+      md5: a41bc9f460cb7cce30feb7133d026b5f
+      size: 674
     - path: src/stage_04_train.py
       hash: md5
       md5: 22e5e1bbfb663d3f93d7a8972b3ee6ae
@@ -143,5 +143,41 @@ stages:
     outs:
     - path: artifacts/saved_model/model.pkl
       hash: md5
-      md5: d95b323a7c47f048e31ef6719c4c02a5
+      md5: 4e7443560f37dcc4072512df606bb09f
       size: 3195673
+  evaluate:
+    cmd: python src/stage_05_evaluate.py --config=configs/config.yaml
+    deps:
+    - path: artifacts/features/test.pkl
+      hash: md5
+      md5: d58c6923c4e18624e6d8aa04441999bb
+      size: 2005996
+    - path: artifacts/saved_model/model.pkl
+      hash: md5
+      md5: 4e7443560f37dcc4072512df606bb09f
+      size: 3195673
+    - path: configs/config.yaml
+      hash: md5
+      md5: a41bc9f460cb7cce30feb7133d026b5f
+      size: 674
+    - path: src/stage_05_evaluate.py
+      hash: md5
+      md5: a47fbda8d2e1eecbbc98d9b5ff1ae2c4
+      size: 2755
+    - path: src/utils/common.py
+      hash: md5
+      md5: 68ff59a3b0f7a34504deec1f5ad7bdca
+      size: 1004
+    outs:
+    - path: prc.json
+      hash: md5
+      md5: 6ff1dc64ec0ed1c542536dfabc1731fa
+      size: 158974
+    - path: roc.json
+      hash: md5
+      md5: 97f19813ce8f13dc8152dbb4a835e467
+      size: 125900
+    - path: scores.json
+      hash: md5
+      md5: e096ccd0ffe0f862d6b33e40afd04ec4
+      size: 76
