@@ -4,29 +4,23 @@ on: [push]
 
 jobs:
   run:
-    runs-on: [ubuntu-latest] # runs on ubuntu os
+    runs-on: [ubuntu-latest]
     steps:
-      - uses: actions/checkout@v2 # 
-      - uses: iterative/setup-cml@v1 # iterative is a company which runs dvc to setup cml
+      - uses: actions/checkout@v2
+      - uses: iterative/setup-cml@v1
       - uses: actions/setup-python@v2
         with:
           python-version: '3.9'
 
       - name: cml-run
-        env:
+        env: 
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-        runs: |
-          # Your ML workflow commands
+        run: |
+          # Your ML wokflow commands
           pip install --upgrade pip
           pip install -r requirements.txt
-          
           dvc repro -v
-
-          echo "# REPORTS " >> report.md
+          echo "# REPORTS" >> report.md
           echo "## metrics" >> report.md
-          cat score.json >> report.md
-
+          cat scores.json >> report.md
           cml-send-comment report.md
-
-
-
