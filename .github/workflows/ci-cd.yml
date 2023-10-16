@@ -20,6 +20,8 @@ jobs:
           --cloud=aws \
           --cloud-region=ap-south-1 \
           --cloud-type=m \
+          --cloud-aws-security-group= sg-039e55ced9e85433e \
+          --cloud-aws-subnet=subnet-06ef99e4cd3fc0c04 \ 
           --labels=cml-runner 
 
   install-requirements-train:
