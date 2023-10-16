@@ -17,8 +17,8 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
           cml-runner \
-          --cloud aws \
-          --cloud-region ap-south-1 \
+          --cloud=aws \
+          --cloud-region=ap-south-1 \
           --cloud-type=m \
           --labels=cml-runner 
 
